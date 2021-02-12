@@ -2,11 +2,30 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/about">About</router-link> |
+      <router-link :to="{ name: 'Registro' }">Register</router-link> |
+      <router-link :to="{ name: 'Login' }">Login</router-link> |
+      <button @click="logout" class="btn btn-danger">Log out</button>
     </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
+
+<script>
+import firebase from "firebase";
+export default {
+  name: "App",
+
+  
+  methods: {
+    logout() {
+      firebase.auth().signOut().then( result => {
+        this.$router.push("/login")
+      })
+    },
+  },
+};
+</script>
 
 <style lang="scss">
 #app {
